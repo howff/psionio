@@ -1,0 +1,105 @@
+Manuals
+-------
+	Apologies for the lack of a proper set of manuals.  As they say "the
+source code is the documentation"!  Please see the comments in the .c and
+the .h files for details of version numbers, features, defaults, bugs,
+things to do, and other notes.
+
+Usage
+-----
+All programs will give a summary of their usage when given a -? (or any
+unknown) parameter, for example:
+	agn2tsv -?
+If you are using unix you should escape the ?
+	agn2tsv -\?
+The references to stdin and stdout refer to standard input and output
+respectively (ie. the keyboard / screen).  If you wish to use a file then
+you will need to use redirection. This facility is available in DOS, Unix
+and Mac OS X: to input a file use < and to output a file use >.  For example:
+	tsv2dbf < input.tsv > output.dbf
+reads input from input.tsv instead of from the keyboard and writes output to
+output.dbf instead of to the screen.
+
+Below is a summary of the options for each program.
+
+-------------------------------------------------------------------------------
+agn2tsv - Extract agenda details to stdout in TSV format.
+agn2tsv [-a] [-c] [-d] [-t] [-f days] [-s] [-v] file.agn
+-a      show all (past) entries
+-f n    repeat entries for n days into the future
+-m      show memos
+-s      sort output by date
+-t      display time length of each entry
+-v      verbose
+-d      debug
+-c      corrupt agenda is searched for next good entry
+-------------------------------------------------------------------------------
+dbf2tsv - Extract DBF contents to stdout in TSV format.
+dbf2tsv [-v] [-d] file.dbf
+-v      verbose
+-d      debug
+-------------------------------------------------------------------------------
+spr2tsv - Extract SPR contents to stdout in TSV format.
+spr2tsv [-p] [-h] [-v] [-d] file.spr
+-p      pretty display
+-h      HTML table output
+-v      verbose
+-d      debug
+-------------------------------------------------------------------------------
+tsv2dbf - Read TSV from stdin and write DBF to stdout.
+tsv2dbf [-c] [-l] [-r|-h]
+Input on stdin, output to stdout.
+-l      First record of input is field labels (this is the default)
+-c      compatibility mode (for Data application) - writes 32 string fields
+        and strings may be longer than 254 characters
+-r      raw, no field labels on first line of input, no header on output
+-h      adds defaults header (wrap, tab size etc) as well as field labels
+-v      verbose
+-d      debug
+Field labels can contain data types by appending to the label name one of the
+following (including the brackets): (Int) or (Word), (Integer) or (Long),
+(Float) or (Real), or (String).
+For example, four fields, two of which are numbers:
+Issue(Long)	Page(Int)	Author	Title
+Int and Word are equivalent     (2 bytes).
+Integer and Long are equivalent (4 bytes).
+Float and Real are equivalent   (8 bytes).
+-------------------------------------------------------------------------------
+tsv2spr - Read TSV from stdin and write SPR to stdout.
+tsv2spr [-h]
+Input on stdin, output to stdout.
+-h      adds defaults header (wrap, tab size etc) - not yet implemented
+-------------------------------------------------------------------------------
+wrd2html - Extract WRD contents and write to stdout in HTML format.
+wrd2txt  - Extract WRD contents and write to stdout as plain text.
+wrd2txt is a symbolic link (ie. alias / shortcut) to the wrd2html program.
+wrd2html [-v] [-d] [-t | -h] file.wrd
+-t : text output }
+-h : HTML output } default depends on name of program (wrd2txt or wrd2html)
+-v : verbose       displays most useful records
+-d : debug         displays record types, sizes and offsets
+If you extract the text with -t but want it line wrapped you could use the
+unix "fmt" utility, for example   wrd2html -t doc.wrd | fmt
+-------------------------------------------------------------------------------
+csv2tsv - Read CSV from stdin and write TSV to stdout.
+-------------------------------------------------------------------------------
+tsv2csv - Read TSV from stdin and write CSV to stdout.
+-------------------------------------------------------------------------------
+
+
+Examples
+--------
+
+	Examples of tsv2dbf usage:
+tsv2dbf        Labels (with optional types) in the first line of the input.
+tsv2dbf -l     Ditto
+tsv2dbf -h     Ditto, and also writes options such as tab size etc.
+tsv2dbf -r     No labels (or types) and no options descriptor written.
+With compatibility mode for reading using the Data application:
+tsv2dbf -c     Labels (but no types) in the first line of the input.
+tsv2dbf -c -l  Ditto
+tsv2dbf -c -h  Ditto, and also writes options such as tab size etc.
+tsv2dbf -c -r  No labels (or types) and no options descriptor written.
+
+	Example converting a database to a form suitable for a spreadsheet
+dbf2tsv file.dbf | tsv2csv > file.csv

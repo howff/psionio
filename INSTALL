@@ -1,0 +1,31 @@
+If you have downloaded the programs then all you need to do is to run them.
+For example in Windows start an MS-DOS prompt, change to this directory and
+run the required program.  DOS can redirect output in the same way as Unix
+so the examples in the manual should all work fine.
+
+If you want to rebuild the programs from the source code then follow the
+instructions below.
+
+To compile just type 'make'.
+
+First make the following changes to suit your system:
+
+1) Makefile
+ a) CC      change the command used to invoke the compiler (eg. CC=gcc)
+ b) CFLAGS  change the compilation flags (eg. CFLAGS=-O or CFLAGS=-g)
+ c) CFLAGS  change the architecture (eg. SUN, PC, ACORN or the explicit
+            byte ordering    [ ** IMPORTANT ** ]
+ d) CFLAGS  add -DCONVERTCHARS if you need characters converted between
+            ISO-8559-1 (standard) and IBM-CodePage-850 (Psion) [Note that
+            not all characters can be converted properly both ways].
+ e) LIBS    change the libraries needed
+
+2) psionio.h
+ a) getopt  you may need to alter the getopt definitions; if your compiler
+            does not provide getopt functions then you can obtain them
+            from GNU repositories or by e-mail from myself.
+ b) strdup  you may need to change the definition.
+
+Note:
+getopt.c is supplied here but is not part of the psionio suite of programs.
+It is simply supplied for your convenience.
