@@ -15,11 +15,11 @@ fixes and minor modifications.  The differences from release
 2 are the inclusion of WRD support and the ability to handle
 databases containing field types other than just strings.
 
-##Installation
+## Installation
 Please read the INSTALL file.  You MUST make the necessary
 changes to the Makefile regarding byte ordering.
 
-##Licence
+## Licence
 This software is PostCardWare; if you use this software you are
 asked to send the author a postcard of where you live.
 
@@ -30,7 +30,7 @@ observed:
 2) Any bugs, comments, suggestions are sent to the author,
 3) A postcard of where you live is sent to the author (see below).
 
-##Programs
+## Programs
 agn2tsv  - Convert Agenda file to TSV format  [TSV=Tab Separated Value]
 dbf2tsv  - Convert Data file to TSV format
 spr2tsv  - Convert Sheet file to TSV format or to an HTML table
@@ -40,7 +40,7 @@ wrd2html - Convert WRD file to HTML or plain text.
 tsv2csv  - Convert TSV format file to CSV
 csv2tsv  - Convert CSV format file to TSV
 
-##Limitations / bugs
+## Limitations / bugs
 spr2tsv  Does not display formulas.
 tsv2spr  Guesses at distinction between integer and real numbers.
 wrd2html Not all style variations are handled yet.
